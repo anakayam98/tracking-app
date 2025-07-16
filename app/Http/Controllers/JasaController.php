@@ -14,12 +14,12 @@ class JasaController extends Controller
     {
         $query = Jasa::query();
 
-    if ($request->filled('search')) {
-        $query->where('nama', 'like', '%' . $request->search . '%');
-    }
+        if ($request->filled('search')) {
+            $query->where('nama', 'like', '%' . $request->search . '%');
+        }
 
-    $jasas = $query->get();
-    return view('jasa.index', compact('jasas'));
+        $jasas = $query->get();
+        return view('jasa.index', compact('jasas'));
     }
 
     /**
@@ -36,16 +36,18 @@ class JasaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'nama' => 'required',
-        'harga' => 'required|numeric',
-        'keterangan' => 'required',
-    ]);
-
-    Jasa::create($request->only([
-        'nama', 'harga', 'keterangan'
-    ]));
-
-    return redirect()->route('jasa.index')->with('success', 'Data berhasil ditambahkan.');
+            'nama' => 'required',
+            'harga' => 'required|numeric',
+            'keterangan' => 'required',
+        ]);
+        
+        Jasa::create($request->only([
+            'nama',
+            'harga',
+            'keterangan'
+        ]));
+        
+        return redirect()->route('jasa.index')->with('success', 'Data berhasil ditambahkan.');
     }
 
     /**
@@ -70,16 +72,18 @@ class JasaController extends Controller
     public function update(Request $request, Jasa $jasa)
     {
         $request->validate([
-        'nama' => 'required',
-        'harga' => 'required|numeric',
-        'keterangan' => 'required',
-    ]);
+            'nama' => 'required',
+            'harga' => 'required|numeric',
+            'keterangan' => 'required',
+        ]);
 
-    $jasa->update($request->only([
-        'nama', 'harga', 'keterangan'
-    ]));
+        $jasa->update($request->only([
+            'nama',
+            'harga',
+            'keterangan'
+        ]));
 
-    return redirect()->route('jasa.index')->with('success', 'Data berhasil diperbarui.');
+        return redirect()->route('jasa.index')->with('success', 'Data berhasil diperbarui.');
     }
 
     /**
@@ -88,6 +92,6 @@ class JasaController extends Controller
     public function destroy(Jasa $jasa)
     {
         $jasa->delete();
-    return redirect()->route('jasa.index')->with('success', 'Data berhasil dihapus.');
+        return redirect()->route('jasa.index')->with('success', 'Data berhasil dihapus.');
     }
 }

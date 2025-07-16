@@ -40,7 +40,7 @@
                             <td>{{ number_format($item->harga_jual, 0, ',', '.') }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td class="text-center">
-                                <a href="{{ route('barang.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ route('barang.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                 <form action="{{ route('barang.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
                                     @csrf @method('DELETE')
                                     <button class="btn btn-sm btn-danger">Hapus</button>

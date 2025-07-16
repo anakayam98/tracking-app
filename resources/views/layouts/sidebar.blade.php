@@ -22,9 +22,16 @@
 
     <!-- Nav Item - Servis -->
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ route('servis.index') }}">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Servis</span>
+        </a>
+    </li>
+    <!-- Nav Item - data tracking -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('detailservis.index') }}">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Data Tracking</span>
         </a>
     </li>
 

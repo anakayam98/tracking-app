@@ -40,7 +40,7 @@
                             <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td class="text-center">
-                                <a href="{{ route('jasa.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ route('jasa.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                 <form action="{{ route('jasa.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
                                     @csrf @method('DELETE')
                                     <button class="btn btn-sm btn-danger">Hapus</button>

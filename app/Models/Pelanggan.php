@@ -8,10 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Pelanggan extends Model
 {
     use HasFactory;
-
-    // Nama tabel (opsional, kalau nama model == nama tabel jamak)
-    protected $table = 'pelanggans';
-
     // Kolom-kolom yang boleh diisi secara mass assignment
     protected $fillable = [
         'nama',
@@ -20,4 +16,5 @@ class Pelanggan extends Model
         'email',
         'alamat',
     ];
-}
+
+    }
