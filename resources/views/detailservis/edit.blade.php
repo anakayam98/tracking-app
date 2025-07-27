@@ -32,7 +32,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label>Servis</label>
+                <label>Nota</label>
                 <select name="id_servis" class="form-control" required>
                     <option value="">-- Pilih Servis --</option>
                     @foreach($servis as $srv)

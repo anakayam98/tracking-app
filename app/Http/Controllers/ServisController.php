@@ -95,7 +95,7 @@ class ServisController extends Controller
      */
     public function show(Servis $servis)
     {
-        return view('servis.show', compact('servis'));
+        return view('servis.view', compact('servis'));
     }
 
     /**

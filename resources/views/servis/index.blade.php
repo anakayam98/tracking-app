@@ -27,39 +27,56 @@
                         <th>No Nota</th>
                         <th>Tanggal Servis</th>
                         <th>Nama Pelanggan</th>
-                        <th>No Hp</th>
+                        {{-- <th>No Hp</th>
                         <th>Email</th>
-                        <th>Alamat</th>
+                        <th>Alamat</th> --}}
                         <th>Unit</th>
                         <th>No Seri</th>
                         <th>Keluhan</th>
-                        <th>Kelengkapan</th>
-                        <th>Pin/Passcode</th>
+                        {{-- <th>Kelengkapan</th>
+                        <th>Pin/Passcode</th> --}}
                         <th>Estimasi Biaya</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
+                <!-- SweetAlert2 -->
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                <script>
+                    @if(session('success'))
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: '{{ session("success") }}',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    @endif
+                </script>
                 <tbody>
                     @foreach($servis as $item)
                         <tr>
                             <td>{{ $item->no_nota }}</td>
                             <td>{{ $item->tgl_servis }}</td>
                             <td>{{ $item->pelanggan->nama ?? '-' }}</td>
-                            <td>{{ $item->pelanggan->no_hp ?? '-' }}</td>
+                            {{-- <td>{{ $item->pelanggan->no_hp ?? '-' }}</td>
                             <td>{{ $item->pelanggan->email ?? '-' }}</td>
-                            <td>{{ $item->pelanggan->alamat ?? '-' }}</td>
+                            <td>{{ $item->pelanggan->alamat ?? '-' }}</td> --}}
                             <td>{{ $item->unit }}</td>
                             <td>{{ $item->no_seri }}</td>
                             <td>{{ $item->keluhan }}</td>
-                            <td>{{ $item->kelengkapan }}</td>
-                            <td>{{ $item->pin_passcode }}</td>
+                            {{-- <td>{{ $item->kelengkapan }}</td>
+                            <td>{{ $item->pin_passcode }}</td> --}}
                             <td>{{ number_format($item->estimasi_biaya, 0, ',', '.') }}</td>
                             <td class="text-center">
-                                <a href="{{ route('servis.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                <form action="{{ route('servis.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
-                                    @csrf @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">Hapus</button>
-                                </form>
+                                <div class="d-flex" role="group" aria-label="Aksi" style="gap: 5px;">
+                                    <a href="{{ route('servis.show', $item->id) }}" class="btn btn-sm btn-info ms-3" title="Lihat"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('servis.edit', $item->id) }}" class="btn btn-sm btn-warning ms-3" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ route('servis.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                                        @csrf @method('DELETE')
+                                        <button class="btn btn-sm btn-danger" title="Hapus"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

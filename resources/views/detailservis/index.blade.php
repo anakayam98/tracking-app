@@ -29,13 +29,15 @@
                         <th>Kode Tracking</th>
                         <th>Barang</th>
                         <th>Jasa</th>
-                        <th>Servis</th>
+                        <th>Nota</th>
                         <th>Pelanggan</th>
                         <th>Harga</th>
                         <th>Jumlah</th>
                         <th>Status</th>
                         <th>Tgl Mulai</th>
                         <th>Tgl Selesai</th>
+                        <th>Bukti</th>
+                        <th>Catatan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -49,9 +51,27 @@
                             <td>{{ $item->pelanggan->nama ?? '-' }}</td>
                             <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
                             <td>{{ $item->jumlah }}</td>
-                            <td>{{ $item->status }}</td>
+                            <td>
+                                @if($item->status == 'Menungu Separepart')
+                                    <span class="badge badge-primary">Menunggu Separepart</span>
+                                @elseif($item->status == 'Sedang Diproses')
+                                    <span class="badge badge-success">Sedang Diproses</span>
+                                @elseif($item->status == 'Sudah Selesai')
+                                    <span class="badge badge-danger">Sudah Selesai</span>
+                                @else
+                                    <span class="badge badge-warning">{{ $item->status }}</span>
+                                @endif
+                            </td>
                             <td>{{ $item->tgl_servis_mulai }}</td>
                             <td>{{ $item->tgl_servis_selesai }}</td>
+                            <td>
+                                @if($item->bukti)
+                                    <a href="{{ asset('storage/' . $item->bukti) }}" target="_blank">Lihat Bukti</a>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td>{{ $item->catatan ?? '-' }}</td>
                             <td class="text-center">
                                 <a href="{{ route('detailservis.edit', $item->id_detail_servis) }}" class="btn btn-sm btn-warning">Edit</a>
                                 <form action="{{ route('detailservis.destroy', $item->id_detail_servis) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">

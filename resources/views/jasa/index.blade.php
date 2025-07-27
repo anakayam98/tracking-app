@@ -32,6 +32,20 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
+                <!-- SweetAlert2 -->
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                <script>
+                    @if(session('success'))
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: '{{ session("success") }}',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    @endif
+                </script>
                 <tbody>
                     @foreach($jasas as $index => $item)
                         <tr>
@@ -40,11 +54,13 @@
                             <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td class="text-center">
-                                <a href="{{ route('jasa.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                <form action="{{ route('jasa.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
-                                    @csrf @method('DELETE')
-                                    <button class="btn btn-sm btn-danger">Hapus</button>
-                                </form>
+                                <div class="btn-group" role="group" aria-label="Aksi" style="gap: 5px;">
+                                    <a href="{{ route('jasa.edit', $item->id) }}" class="btn btn-sm btn-warning" title="Edit"><i class="fas fa-edit"></i></a>
+                                    <form action="{{ route('jasa.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
+                                        @csrf @method('DELETE')
+                                        <button class="btn btn-sm btn-danger" title="Hapus"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
